@@ -23,7 +23,6 @@ int alarm = 11;
 int heightOfTank = 0;
 int minimum_moisture = 0;
 int maximum_moisture = 0;
-int longPressAction;
 int page = 0;
 int alarm_dt = 100;
 int dt = 300;
@@ -64,6 +63,9 @@ void setup() {
   lcd.setCursor(0,0);
   lcd.print("Your H.O.T: 0");
     
+  int longPress = 0;
+  int longPressReset = 2;
+
   while (page == 0){
 
     if (digitalRead(increase_btn) == 1){
@@ -97,27 +99,41 @@ void setup() {
 
     else if (digitalRead(decrease_btn) == 1){
 
-      // count ++;
-
       delay(dt);
       
-      heightOfTank -= 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Your H.O.T: ");
-      lcd.setCursor(12, 0);
+      longPress ++;
 
-      if (heightOfTank <= 0){
+      Serial.print("Long press is: ");
+      Serial.println (longPress);
 
-        heightOfTank = 0;
-        lcd.print(heightOfTank);
+      if (longPress >= longPressReset){
+
+        page += 1;
 
       }
 
       else{
 
-        lcd.print(heightOfTank);
+        // longPressReset += 1;
+        heightOfTank -= 1;
+        // longPressReset += 1;
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Your H.O.T: ");
+        lcd.setCursor(12, 0);
 
+        if (heightOfTank <= 0){
+
+          heightOfTank = 0;
+          lcd.print(heightOfTank);
+
+        }
+
+        else{
+
+          lcd.print(heightOfTank);
+
+        }
       }
 
     }
