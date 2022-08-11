@@ -23,14 +23,15 @@ int alarm = 11;
 int heightOfTank = 0;
 int minimum_moisture = 0;
 int maximum_moisture = 0;
+int longPressAction;
 int page = 0;
 int alarm_dt = 100;
 int dt = 300;
 int ultrasonic_dt = 10;
 int nextBtn_dt = 500;
 int increase_btn = 12;
-int decrease_btn = 0;
-int next_btn = 13;
+int decrease_btn = 13;
+// int next_btn = 13;
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
 
@@ -43,7 +44,7 @@ void setup() {
   pinMode(moisture, INPUT);
   pinMode(increase_btn,  INPUT);
   pinMode(decrease_btn, INPUT);
-  pinMode(next_btn, INPUT);
+  // pinMode(next_btn, INPUT);
 
   lcd.begin(16, 2);
   Serial.begin(9600);
@@ -69,12 +70,7 @@ void setup() {
 
       delay(dt);
       heightOfTank += 1;
-      // lcd.clear();
-      // lcd.setCursor(0,0);
-      // lcd.print("Your H.O.T: ");
-      // lcd.setCursor(12, 0);
-      // lcd.print(heightOfTank);
-        
+
       if (heightOfTank >= 99){
 
         heightOfTank = 99;
@@ -101,7 +97,10 @@ void setup() {
 
     else if (digitalRead(decrease_btn) == 1){
 
+      // count ++;
+
       delay(dt);
+      
       heightOfTank -= 1;
       lcd.clear();
       lcd.setCursor(0,0);
@@ -123,27 +122,27 @@ void setup() {
 
     }
 
-    else if (digitalRead(next_btn) == 1){
+    // else if (digitalRead(next_btn) == 1){
 
-      if (heightOfTank > 0){
+    //   if (heightOfTank > 0){
 
-        page += 1;
+    //     page += 1;
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Min Moisture: 0");
-        delay(nextBtn_dt);
+    //     lcd.clear();
+    //     lcd.setCursor(0,0);
+    //     lcd.print("Min Moisture: 0");
+    //     delay(nextBtn_dt);
 
-      }
+    //   }
 
-      else{
+    //   else{
 
-        page += 0;
-        delay(nextBtn_dt);
+    //     page += 0;
+    //     delay(nextBtn_dt);
 
-      }
+    //   }
 
-    }
+    // }
 
   }
 
@@ -209,26 +208,26 @@ void setup() {
 
     }
 
-    else if (digitalRead(next_btn) == 1){
+    // else if (digitalRead(next_btn) == 1){
 
-      if (minimum_moisture > 0){
+    //   if (minimum_moisture > 0){
 
-        page += 1;
+    //     page += 1;
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Max Moisture: 0");
-        delay(nextBtn_dt);
+    //     lcd.clear();
+    //     lcd.setCursor(0,0);
+    //     lcd.print("Max Moisture: 0");
+    //     delay(nextBtn_dt);
 
-      }
+    //   }
 
-      else{
+    //   else{
 
-        page += 0;
+    //     page += 0;
 
-      }
+    //   }
 
-    }
+    // }
 
   }
 
@@ -283,25 +282,25 @@ void setup() {
 
     }
 
-    else if (digitalRead(next_btn) == 1){
+    // else if (digitalRead(next_btn) == 1){
 
-      if (maximum_moisture > 0){
+    //   if (maximum_moisture > 0){
 
-        page += 1;
+    //     page += 1;
 
-        lcd.clear();
-        delay(nextBtn_dt);
+    //     lcd.clear();
+    //     delay(nextBtn_dt);
 
-      }
+    //   }
 
-      else {
+    //   else {
 
-        page += 0;
-        delay(nextBtn_dt);
+    //     page += 0;
+    //     delay(nextBtn_dt);
 
-      }
+    //   }
 
-    }
+    // }
 
 
   }
