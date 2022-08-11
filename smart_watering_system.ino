@@ -20,15 +20,23 @@ float empty_volume;
 float remain_volume;
 float tank_percent;
 int alarm = 11;
+float heightOfTank;
+float minimum_moisture;
+float maximum_moisture;
+int page = 0;
+int alarm_dt = 100;
 int dt = 200;
-int udt = 10; 
+int udt = 10;
+int increase_btn = 12;
+int decrease_btn = 13;
+int next_btn = 0;
+
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
 
 void setup() {
   // put your setup code here, to run once:
-
-
+  
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(pump, OUTPUT);
@@ -48,81 +56,83 @@ void loop() {
   digitalWrite(trig, LOW);
 
   duration = pulseIn(echo, HIGH);
-  
+
   height = 0.0343 * (duration / 2);
+
 
   moisture_value = analogRead(moisture);
 
-  moisture_percent = (moisture_value/30.) * 100.;
+
+
+  moisture_percent = (moisture_value / 30.) * 100.;
 
   empty_volume = pie * tank_radius * height;
 
-  Serial.print("empty volume is: ");
-  Serial.println(empty_volume);
+  remain_volume = 866.013575 - empty_volume;
 
-  remain_volume = 779.41 - empty_volume;
+  tank_percent = (remain_volume / 866.013575) * 100.;
 
-  tank_percent = (remain_volume / 779.41) * 100.;
-  
+    Serial.print("pump is: ");
+  Serial.println(digitalRead(pump));
+  delay(1000);
+  if (tank_percent <= 0) {
 
-  if (tank_percent <= 0){
-    
-      tank_percent = 0;
-    
-    }
-  
-  lcd.setCursor(0,0);
+    tank_percent = 0;
+
+  }
+
+  lcd.setCursor(0, 0);
   lcd.print("Moisture: ");
 
-  lcd.setCursor(0,1);
+  lcd.setCursor(0, 1);
   lcd.print("WaterLvl: ");
 
-  if (moisture_percent >= 100){
-    
+  if (moisture_percent >= 100) {
+
     lcd.setCursor(9, 0);
     lcd.print(100);
     lcd.print("%");
-    Serial.println(moisture_value);
     delay(dt);
   }
 
-  else{
-    
+  else {
+
     lcd.setCursor(9, 0);
     lcd.print(moisture_percent);
     lcd.print("%");
-    Serial.println(moisture_value);
-    delay(dt); 
-    
-    }
-    
+    delay(dt);
+
+  }
+
   lcd.setCursor(10, 1);
   lcd.print(tank_percent);
   lcd.print("%");
   delay(50);
 
-    
-  if (moisture_percent <= 40){
 
-      if (tank_percent >= 50){
-        
-        digitalWrite(pump, HIGH);
-        digitalWrite(alarm, LOW);
-    
+  if (moisture_percent <= 40) {
+
+    if (tank_percent >= 50) {
+
+      digitalWrite(pump, HIGH);
+      digitalWrite(alarm, LOW);
+
     }
 
-    else{
+    else {
 
       digitalWrite(alarm, HIGH);
+      delay(alarm_dt);
+      digitalWrite(alarm, LOW);
       digitalWrite(pump, LOW);
-      
-      }
-    }
 
-    else{
-      
-        digitalWrite(alarm, LOW);
-        digitalWrite(pump, LOW);
-      
-      }
+    }
+  }
+
+  else {
+
+    digitalWrite(alarm, LOW);
+    digitalWrite(pump, LOW);
+
+  }
 }
