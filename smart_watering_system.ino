@@ -20,39 +20,303 @@ float empty_volume;
 float remain_volume;
 float tank_percent;
 int alarm = 11;
-float heightOfTank;
-float minimum_moisture;
-float maximum_moisture;
+int heightOfTank = 0;
+int minimum_moisture = 0;
+int maximum_moisture = 0;
 int page = 0;
 int alarm_dt = 100;
-int dt = 200;
-int udt = 10;
+int dt = 300;
+int ultrasonic_dt = 10;
+int nextBtn_dt = 500;
 int increase_btn = 12;
-int decrease_btn = 13;
-int next_btn = 0;
-
+int decrease_btn = 0;
+int next_btn = 13;
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
 
 void setup() {
-  // put your setup code here, to run once:
-  
+
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT);
   pinMode(pump, OUTPUT);
   pinMode(alarm, OUTPUT);
   pinMode(moisture, INPUT);
+  pinMode(increase_btn,  INPUT);
+  pinMode(decrease_btn, INPUT);
+  pinMode(next_btn, INPUT);
+
   lcd.begin(16, 2);
   Serial.begin(9600);
+
+  for (int i = 0; i <= 23; i++){
+
+    lcd.setCursor(0,0);
+    lcd.scrollDisplayLeft();
+    lcd.print(" Automatic Flower Watering System");
+    delay(dt);
+    lcd.noAutoscroll();  
+
+  }
+    
+  lcd.clear();
+
+  lcd.setCursor(0,0);
+  lcd.print("Your H.O.T: 0");
+    
+  while (page == 0){
+
+    if (digitalRead(increase_btn) == 1){
+
+      delay(dt);
+      heightOfTank += 1;
+      // lcd.clear();
+      // lcd.setCursor(0,0);
+      // lcd.print("Your H.O.T: ");
+      // lcd.setCursor(12, 0);
+      // lcd.print(heightOfTank);
+        
+      if (heightOfTank >= 99){
+
+        heightOfTank = 99;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Your H.O.T: ");
+        lcd.setCursor(12, 0);
+        lcd.print(heightOfTank);
+
+      }
+
+      else{
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Your H.O.T: ");
+        lcd.setCursor(12, 0);
+        lcd.print(heightOfTank);
+
+      }
+
+    }
+
+    else if (digitalRead(decrease_btn) == 1){
+
+      delay(dt);
+      heightOfTank -= 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Your H.O.T: ");
+      lcd.setCursor(12, 0);
+
+      if (heightOfTank <= 0){
+
+        heightOfTank = 0;
+        lcd.print(heightOfTank);
+
+      }
+
+      else{
+
+        lcd.print(heightOfTank);
+
+      }
+
+    }
+
+    else if (digitalRead(next_btn) == 1){
+
+      if (heightOfTank > 0){
+
+        page += 1;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Min Moisture: 0");
+        delay(nextBtn_dt);
+
+      }
+
+      else{
+
+        page += 0;
+        delay(nextBtn_dt);
+
+      }
+
+    }
+
+  }
+
+
+  while (page == 1){
+
+
+    if (digitalRead(increase_btn) == 1){
+
+      delay(dt);
+      minimum_moisture += 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Min Moisture: ");
+      lcd.setCursor(14, 0);
+      lcd.print(minimum_moisture);
+
+      if (minimum_moisture >= 99){
+
+        minimum_moisture = 99;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Min Moisture: ");
+        lcd.setCursor(14, 0);
+        lcd.print(minimum_moisture);
+
+      }
+
+      else{
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Min Moisture: ");
+        lcd.setCursor(14, 0);
+        lcd.print(minimum_moisture);
+
+      }
+    }
+
+    else if(digitalRead(decrease_btn) == 1){
+
+      delay(dt);
+      minimum_moisture -= 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Min Moisture: ");
+      lcd.setCursor(14, 0);
+
+      if(minimum_moisture <= 0){
+
+        minimum_moisture = 0;
+        lcd.print(minimum_moisture);
+
+      }
+
+      else{
+
+        lcd.print(minimum_moisture);
+        delay(nextBtn_dt);
+
+      }
+
+    }
+
+    else if (digitalRead(next_btn) == 1){
+
+      if (minimum_moisture > 0){
+
+        page += 1;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Max Moisture: 0");
+        delay(nextBtn_dt);
+
+      }
+
+      else{
+
+        page += 0;
+
+      }
+
+    }
+
+  }
+
+  while (page == 2){
+
+    if (digitalRead(increase_btn) == 1){
+
+      delay(dt);
+      maximum_moisture += 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Max Moisture: ");
+      lcd.setCursor(14, 0);
+      lcd.print(maximum_moisture);
+
+      if (maximum_moisture >= 99){
+
+        maximum_moisture = 99;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Max Moisture: ");
+        lcd.setCursor(14, 0);
+        lcd.print(maximum_moisture);
+
+      }
+
+    }
+    
+    else if (digitalRead(decrease_btn) == 1){
+
+      delay(dt);
+      maximum_moisture -= 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Max Moisture: ");
+      lcd.setCursor(14, 0);
+
+      if (maximum_moisture <= 0){
+
+        maximum_moisture = 0;
+        lcd.print(maximum_moisture);
+
+      }
+
+
+      else{
+
+        lcd.print(maximum_moisture);
+
+      }
+
+    }
+
+    else if (digitalRead(next_btn) == 1){
+
+      if (maximum_moisture > 0){
+
+        page += 1;
+
+        lcd.clear();
+        delay(nextBtn_dt);
+
+      }
+
+      else {
+
+        page += 0;
+        delay(nextBtn_dt);
+
+      }
+
+    }
+
+
+  }
+
+
+  delay(500);
 }
 
 void loop() {
 
   digitalWrite(trig, LOW);
-  delayMicroseconds(udt);
+  delayMicroseconds(ultrasonic_dt);
 
   digitalWrite(trig, HIGH);
-  delayMicroseconds(udt);
+  delayMicroseconds(ultrasonic_dt);
   digitalWrite(trig, LOW);
 
   duration = pulseIn(echo, HIGH);
