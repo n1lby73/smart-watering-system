@@ -8,21 +8,23 @@ int d2 = 6;
 int d3 = 7;
 int trig = 8;
 int echo = 9;
-int duration;
-int height;
-int moisture = A0;
+float duration;
+float height;
+float moisture = A0;
 float moisture_percent;
+float minimum_moisture_percent;
 float moisture_value;
-float tank_radius = 5.25 * 5.25;
 int pump = 10;
 float pie = 3.142;
 float empty_volume;
 float remain_volume;
+float total_volume;
 float tank_percent;
 int alarm = 11;
-int heightOfTank = 0;
-int minimum_moisture = 0;
-int maximum_moisture = 0;
+float heightOfTank = 0;
+float minimum_moisture = 0;
+float maximum_moisture = 0;
+float tankRadius = 0;
 int page = 0;
 int alarm_dt = 100;
 int dt = 300;
@@ -62,7 +64,7 @@ void setup() {
   lcd.clear();
 
   lcd.setCursor(0,0);
-  lcd.print("Your H.O.T: 0");
+  lcd.print("Your H.O.T: 0.00");
     
 
   while (page == 0){
@@ -112,7 +114,7 @@ void setup() {
         page += 1;
         lcd.clear();
         lcd.setCursor(0,0);
-        lcd.print("Min Moisture: 0");
+        lcd.print("Your R.O.T: 0.00");
 
       }
 
@@ -141,9 +143,82 @@ void setup() {
     }
   }
 
-
-
   while (page == 1){
+
+    if (digitalRead(increase_btn) == 1){
+
+    delay(dt);
+    tankRadius += 1;
+
+    if (tankRadius >= 99){
+
+      tankRadius = 99;
+
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Your R.O.T: ");
+      lcd.setCursor(12, 0);
+      lcd.print(tankRadius);
+
+    }
+
+    else{
+
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Your R.O.T: ");
+      lcd.setCursor(12, 0);
+      lcd.print(tankRadius);
+
+    }
+  }
+
+  else if(digitalRead(decrease_btn) == 1){
+
+    delay(dt);
+    timed = 0;
+
+    while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
+
+      timed++;
+        
+    }
+
+    if (( timed >= longPressDuration ) && (tankRadius > 0)){
+        
+      page += 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Max Moisture: 0.00");
+
+
+    }
+
+    else{
+
+      tankRadius -= 1;
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Your R.O.T: ");
+      lcd.setCursor(14, 0);
+
+      if(tankRadius <= 0){
+
+        tankRadius = 0;
+        lcd.print(tankRadius);
+
+      }
+
+      else{
+
+        lcd.print(tankRadius);
+
+      }
+    }
+  }
+}
+
+  while (page == 2){
 
     if (digitalRead(increase_btn) == 1){
 
@@ -219,7 +294,7 @@ void setup() {
     }
   }
 
-  while (page == 2){
+  while (page == 3){
     
     if (digitalRead(increase_btn) == 1){
 
@@ -309,24 +384,44 @@ void loop() {
 
   duration = pulseIn(echo, HIGH);
 
-  height = 0.0343 * (duration / 2);
-
+//  int height = (0.0343 * (duration/2));
 
   moisture_value = analogRead(moisture);
 
+  moisture_percent = (moisture_value / maximum_moisture) * 100.;
 
+  minimum_moisture_percent = (minimum_moisture / maximum_moisture) * 100.;
 
-  moisture_percent = (moisture_value / 30.) * 100.;
+  Serial.println(minimum_moisture_percent);
 
-  empty_volume = pie * tank_radius * height;
+//  float emptyVolume = (pie * (tankRadius * tankRadius) * (0.0343 * (duration/2)));
 
-  remain_volume = 866.013575 - empty_volume;
+//    Serial.print("empty under is: ");
+//  Serial.print(digitalRead(emptyVolume));
+//  Serial.print(" and ");
+//  Serial.println(pie * (tankRadius * tankRadius) * (0.0343 * (duration/2)));
+//  delay(1000);
 
-  tank_percent = (remain_volume / 866.013575) * 100.;
+  total_volume = (pie * (tankRadius * tankRadius) * heightOfTank);
 
-    Serial.print("pump is: ");
-  Serial.println(digitalRead(pump));
-  delay(1000);
+//  Serial.println(total_volume);
+
+  remain_volume = (total_volume - (pie * (tankRadius * tankRadius) * 0.0343 *(duration/2)));
+//  Serial.println (duration);
+//  delay(1000);
+//  Serial.println(remain_volume);
+//  delay(1000);
+
+  tank_percent = ((remain_volume / total_volume) * 100.);
+//  Serial.println(tank_percent);
+
+//     Serial.print("height is: ");
+//  Serial.println(digitalRead(height));
+//  delay(1000);
+//     Serial.print("duration is: ");
+//  Serial.println(digitalRead(duration));
+//  delay(1000);
+
   if (tank_percent <= 0) {
 
     tank_percent = 0;
@@ -362,7 +457,7 @@ void loop() {
   delay(50);
 
 
-  if (moisture_percent <= 40) {
+  if (moisture_percent <= minimum_moisture_percent) {
 
     if (tank_percent >= 50) {
 
