@@ -383,9 +383,7 @@ void loop() {
   digitalWrite(trig, LOW);
 
   duration = pulseIn(echo, HIGH);
-
-//  int height = (0.0343 * (duration/2));
-
+  
   moisture_value = analogRead(moisture);
 
   moisture_percent = (moisture_value / maximum_moisture) * 100.;
@@ -394,33 +392,11 @@ void loop() {
 
   Serial.println(minimum_moisture_percent);
 
-//  float emptyVolume = (pie * (tankRadius * tankRadius) * (0.0343 * (duration/2)));
-
-//    Serial.print("empty under is: ");
-//  Serial.print(digitalRead(emptyVolume));
-//  Serial.print(" and ");
-//  Serial.println(pie * (tankRadius * tankRadius) * (0.0343 * (duration/2)));
-//  delay(1000);
-
   total_volume = (pie * (tankRadius * tankRadius) * heightOfTank);
 
-//  Serial.println(total_volume);
-
   remain_volume = (total_volume - (pie * (tankRadius * tankRadius) * 0.0343 *(duration/2)));
-//  Serial.println (duration);
-//  delay(1000);
-//  Serial.println(remain_volume);
-//  delay(1000);
 
   tank_percent = ((remain_volume / total_volume) * 100.);
-//  Serial.println(tank_percent);
-
-//     Serial.print("height is: ");
-//  Serial.println(digitalRead(height));
-//  delay(1000);
-//     Serial.print("duration is: ");
-//  Serial.println(digitalRead(duration));
-//  delay(1000);
 
   if (tank_percent <= 0) {
 
