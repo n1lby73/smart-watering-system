@@ -28,8 +28,12 @@ int alarm_dt = 100;
 int dt = 300;
 int ultrasonic_dt = 10;
 int nextBtn_dt = 500;
+int longPressDuration = 5;
 int increase_btn = 12;
 int decrease_btn = 13;
+int timed;
+// int decrease_btn_state = digitalRead(decrease_btn);
+// int last_decrease_btn_state = 0;
 // int next_btn = 13;
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
@@ -63,8 +67,11 @@ void setup() {
   lcd.setCursor(0,0);
   lcd.print("Your H.O.T: 0");
     
-  int longPress = 0;
-  int longPressReset = 2;
+  // int longPress = 0;
+  // int longPressReset = 1;
+
+  // int decrease_btn_state;
+  // int last_decrease_btn_state = 0;
 
   while (page == 0){
 
@@ -100,23 +107,28 @@ void setup() {
     else if (digitalRead(decrease_btn) == 1){
 
       delay(dt);
+      timed = 0;
       
-      longPress ++;
+//      timed = millis();
 
-      Serial.print("Long press is: ");
-      Serial.println (longPress);
+      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
+        timed++;
+        Serial.print("Button State => ");
+        Serial.println(digitalRead(decrease_btn));
+        delay(dt);
+        Serial.println(timed);
+      }
 
-      if (longPress >= longPressReset){
+      if (timed >= longPressDuration){
 
         page += 1;
-
+        Serial.println("testing");
+      
       }
 
       else{
 
-        // longPressReset += 1;
         heightOfTank -= 1;
-        // longPressReset += 1;
         lcd.clear();
         lcd.setCursor(0,0);
         lcd.print("Your H.O.T: ");
@@ -134,33 +146,11 @@ void setup() {
           lcd.print(heightOfTank);
 
         }
+
       }
-
     }
-
-    // else if (digitalRead(next_btn) == 1){
-
-    //   if (heightOfTank > 0){
-
-    //     page += 1;
-
-    //     lcd.clear();
-    //     lcd.setCursor(0,0);
-    //     lcd.print("Min Moisture: 0");
-    //     delay(nextBtn_dt);
-
-    //   }
-
-    //   else{
-
-    //     page += 0;
-    //     delay(nextBtn_dt);
-
-    //   }
-
-    // }
-
   }
+
 
 
   while (page == 1){
