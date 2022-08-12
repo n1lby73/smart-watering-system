@@ -32,9 +32,7 @@ int longPressDuration = 5;
 int increase_btn = 12;
 int decrease_btn = 13;
 int timed;
-// int decrease_btn_state = digitalRead(decrease_btn);
-// int last_decrease_btn_state = 0;
-// int next_btn = 13;
+
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
 
@@ -47,7 +45,6 @@ void setup() {
   pinMode(moisture, INPUT);
   pinMode(increase_btn,  INPUT);
   pinMode(decrease_btn, INPUT);
-  // pinMode(next_btn, INPUT);
 
   lcd.begin(16, 2);
   Serial.begin(9600);
@@ -67,11 +64,6 @@ void setup() {
   lcd.setCursor(0,0);
   lcd.print("Your H.O.T: 0");
     
-  // int longPress = 0;
-  // int longPressReset = 1;
-
-  // int decrease_btn_state;
-  // int last_decrease_btn_state = 0;
 
   while (page == 0){
 
@@ -109,21 +101,19 @@ void setup() {
       delay(dt);
       timed = 0;
       
-//      timed = millis();
-
       while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
+
         timed++;
-        Serial.print("Button State => ");
-        Serial.println(digitalRead(decrease_btn));
-        delay(dt);
-        Serial.println(timed);
+
       }
 
-      if (timed >= longPressDuration){
+      if (( timed >= longPressDuration ) && (heightOfTank > 0)){
 
         page += 1;
-        Serial.println("testing");
-      
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Min Moisture: 0");
+
       }
 
       else{
@@ -155,16 +145,10 @@ void setup() {
 
   while (page == 1){
 
-
     if (digitalRead(increase_btn) == 1){
 
       delay(dt);
       minimum_moisture += 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Min Moisture: ");
-      lcd.setCursor(14, 0);
-      lcd.print(minimum_moisture);
 
       if (minimum_moisture >= 99){
 
@@ -192,66 +176,69 @@ void setup() {
     else if(digitalRead(decrease_btn) == 1){
 
       delay(dt);
-      minimum_moisture -= 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Min Moisture: ");
-      lcd.setCursor(14, 0);
+      timed = 0;
 
-      if(minimum_moisture <= 0){
+      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
 
-        minimum_moisture = 0;
-        lcd.print(minimum_moisture);
+        timed++;
+        
+      }
+
+      if (( timed >= longPressDuration ) && (minimum_moisture > 0)){
+        
+        page += 1;
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Max Moisture: 0");
+
 
       }
 
       else{
 
-        lcd.print(minimum_moisture);
-        delay(nextBtn_dt);
+        minimum_moisture -= 1;
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Min Moisture: ");
+        lcd.setCursor(14, 0);
+
+        if(minimum_moisture <= 0){
+
+          minimum_moisture = 0;
+          lcd.print(minimum_moisture);
+
+        }
+
+        else{
+
+          lcd.print(minimum_moisture);
+
+        }
 
       }
-
     }
-
-    // else if (digitalRead(next_btn) == 1){
-
-    //   if (minimum_moisture > 0){
-
-    //     page += 1;
-
-    //     lcd.clear();
-    //     lcd.setCursor(0,0);
-    //     lcd.print("Max Moisture: 0");
-    //     delay(nextBtn_dt);
-
-    //   }
-
-    //   else{
-
-    //     page += 0;
-
-    //   }
-
-    // }
-
   }
 
   while (page == 2){
-
+    
     if (digitalRead(increase_btn) == 1){
 
       delay(dt);
       maximum_moisture += 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Max Moisture: ");
-      lcd.setCursor(14, 0);
-      lcd.print(maximum_moisture);
 
       if (maximum_moisture >= 99){
 
         maximum_moisture = 99;
+
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Max Moisture: ");
+        lcd.setCursor(14, 0);
+        lcd.print(maximum_moisture);
+
+      }
+
+      else{
 
         lcd.clear();
         lcd.setCursor(0,0);
@@ -266,48 +253,44 @@ void setup() {
     else if (digitalRead(decrease_btn) == 1){
 
       delay(dt);
-      maximum_moisture -= 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Max Moisture: ");
-      lcd.setCursor(14, 0);
+      timed = 0;
 
-      if (maximum_moisture <= 0){
+      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
 
-        maximum_moisture = 0;
-        lcd.print(maximum_moisture);
-
+        timed++;
+        
       }
 
+      if (( timed >= longPressDuration ) && (maximum_moisture > 0) && (minimum_moisture < maximum_moisture)){
+
+        page += 1;
+        lcd.clear();
+
+      }
 
       else{
 
-        lcd.print(maximum_moisture);
+        maximum_moisture -= 1;
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Max Moisture: ");
+        lcd.setCursor(14, 0);
 
+        if (maximum_moisture <= 0){
+
+          maximum_moisture = 0;
+          lcd.print(maximum_moisture);
+
+        }
+
+
+        else{
+
+          lcd.print(maximum_moisture);
+
+        }
       }
-
     }
-
-    // else if (digitalRead(next_btn) == 1){
-
-    //   if (maximum_moisture > 0){
-
-    //     page += 1;
-
-    //     lcd.clear();
-    //     delay(nextBtn_dt);
-
-    //   }
-
-    //   else {
-
-    //     page += 0;
-    //     delay(nextBtn_dt);
-
-    //   }
-
-    // }
-
 
   }
 
