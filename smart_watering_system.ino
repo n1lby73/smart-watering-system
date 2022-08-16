@@ -30,10 +30,10 @@ int alarm_dt = 100;
 int dt = 300;
 int ultrasonic_dt = 10;
 int nextBtn_dt = 500;
-int longPressDuration = 5;
+int longPressDuration = 30;
 int increase_btn = 12;
 int decrease_btn = 13;
-int timed;
+int timer;
 
 
 LiquidCrystal lcd (rs, en, d0, d1, d2, d3);
@@ -55,7 +55,7 @@ void setup() {
 
     lcd.setCursor(0,0);
     lcd.scrollDisplayLeft();
-    lcd.print(" Automatic Flower Watering System");
+    lcd.print("  Automatic Flower Watering System");
     delay(dt);
     lcd.noAutoscroll();  
 
@@ -66,311 +66,449 @@ void setup() {
   lcd.setCursor(0,0);
   lcd.print("Your H.O.T: 0.00");
     
+  while (page <= 4){
 
-  while (page == 0){
+    while (page == 0){
 
-    if (digitalRead(increase_btn) == 1){
+      if (digitalRead(increase_btn) == 1){
 
-      delay(dt);
-      heightOfTank += 1;
 
-      if (heightOfTank >= 99){
+        delay(dt);
+        timer = 0;
 
-        heightOfTank = 99;
+        while ((digitalRead(increase_btn) == 1) && (timer <= longPressDuration)){
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Your H.O.T: ");
-        lcd.setCursor(12, 0);
-        lcd.print(heightOfTank);
+          timer ++;
+
+        }
+
+        if (( timer >= longPressDuration ) && (heightOfTank > 0)){
+
+          page += 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Your R.O.T: 0.00");
+          lcd.setCursor(12,0);
+          lcd.print(tankRadius);
+
+        }
+
+        else{
+
+          heightOfTank +=1;
+
+          if (heightOfTank >= 99){
+
+            heightOfTank = 99;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your H.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(heightOfTank);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your H.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(heightOfTank);
+          }
+
+        } 
 
       }
 
-      else{
+      else if (digitalRead(decrease_btn) == 1){
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Your H.O.T: ");
-        lcd.setCursor(12, 0);
-        lcd.print(heightOfTank);
-
-      }
-
-    }
-
-    else if (digitalRead(decrease_btn) == 1){
-
-      delay(dt);
-      timed = 0;
-      
-      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
-
-        timed++;
-
-      }
-
-      if (( timed >= longPressDuration ) && (heightOfTank > 0)){
-
-        page += 1;
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Your R.O.T: 0.00");
-
-      }
-
-      else{
+        delay (dt);
 
         heightOfTank -= 1;
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Your H.O.T: ");
-        lcd.setCursor(12, 0);
 
         if (heightOfTank <= 0){
 
           heightOfTank = 0;
+
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Your H.O.T: ");
+          lcd.setCursor(12,0);
           lcd.print(heightOfTank);
 
         }
 
         else{
 
-          lcd.print(heightOfTank);
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Your H.O.T: ");
+          lcd.setCursor(12,0);
+          lcd.print(heightOfTank);        
+
+        }
+      }
+    }
+
+    while (page == 1){
+
+      if (digitalRead(increase_btn) == 1){
+
+
+        delay(dt);
+        timer = 0;
+
+        while ((digitalRead(increase_btn) == 1) && (timer <= longPressDuration)){
+
+          timer ++;
 
         }
 
-      }
-    }
-  }
+        if (( timer >= longPressDuration ) && (tankRadius > 0)){
 
-  while (page == 1){
-
-    if (digitalRead(increase_btn) == 1){
-
-    delay(dt);
-    tankRadius += 1;
-
-    if (tankRadius >= 99){
-
-      tankRadius = 99;
-
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Your R.O.T: ");
-      lcd.setCursor(12, 0);
-      lcd.print(tankRadius);
-
-    }
-
-    else{
-
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Your R.O.T: ");
-      lcd.setCursor(12, 0);
-      lcd.print(tankRadius);
-
-    }
-  }
-
-  else if(digitalRead(decrease_btn) == 1){
-
-    delay(dt);
-    timed = 0;
-
-    while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
-
-      timed++;
-        
-    }
-
-    if (( timed >= longPressDuration ) && (tankRadius > 0)){
-        
-      page += 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Max Moisture: 0.00");
-
-
-    }
-
-    else{
-
-      tankRadius -= 1;
-      lcd.clear();
-      lcd.setCursor(0,0);
-      lcd.print("Your R.O.T: ");
-      lcd.setCursor(14, 0);
-
-      if(tankRadius <= 0){
-
-        tankRadius = 0;
-        lcd.print(tankRadius);
-
-      }
-
-      else{
-
-        lcd.print(tankRadius);
-
-      }
-    }
-  }
-}
-
-  while (page == 2){
-
-    if (digitalRead(increase_btn) == 1){
-
-      delay(dt);
-      minimum_moisture += 1;
-
-      if (minimum_moisture >= 99){
-
-        minimum_moisture = 99;
-
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Min Moisture: ");
-        lcd.setCursor(14, 0);
-        lcd.print(minimum_moisture);
-
-      }
-
-      else{
-
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Min Moisture: ");
-        lcd.setCursor(14, 0);
-        lcd.print(minimum_moisture);
-
-      }
-    }
-
-    else if(digitalRead(decrease_btn) == 1){
-
-      delay(dt);
-      timed = 0;
-
-      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
-
-        timed++;
-        
-      }
-
-      if (( timed >= longPressDuration ) && (minimum_moisture > 0)){
-        
-        page += 1;
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Max Moisture: 0");
-
-
-      }
-
-      else{
-
-        minimum_moisture -= 1;
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Min Moisture: ");
-        lcd.setCursor(14, 0);
-
-        if(minimum_moisture <= 0){
-
-          minimum_moisture = 0;
+          page += 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Min Moisture: ");
+          lcd.setCursor(12,0);
           lcd.print(minimum_moisture);
 
         }
 
         else{
 
-          lcd.print(minimum_moisture);
+          tankRadius +=1;
+
+          if (tankRadius >= 99){
+
+            tankRadius = 99;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your R.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(tankRadius);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your R.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(tankRadius);
+          }
+
+        } 
+
+      }
+
+      else if (digitalRead(decrease_btn) == 1){
+
+        delay (dt);
+        timer = 0;
+
+        while((digitalRead(decrease_btn) ==1) && (timer <= longPressDuration)){
+
+          timer++;
+            
+        }
+
+        if ( timer >= longPressDuration ){
+            
+          page -= 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Your H.O.T: 0.00");
+          lcd.setCursor(12,0);
+          lcd.print(heightOfTank);
+
+        }
+
+        else{
+
+          tankRadius -= 1;
+
+          if (tankRadius <= 0){
+
+            tankRadius = 0;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your R.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(tankRadius);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Your R.O.T: ");
+            lcd.setCursor(12,0);
+            lcd.print(tankRadius);        
+
+          }
+        }
+      }
+    }
+
+    while (page == 2){
+
+      if (digitalRead(increase_btn) == 1){
+
+        delay(dt);
+        timer = 0;
+
+        while ((digitalRead(increase_btn) == 1) && (timer <= longPressDuration)){
+
+          timer ++;
+
+        }
+
+        if (( timer >= longPressDuration ) && (minimum_moisture > 0)){
+
+          page += 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Max Moisture: ");
+          lcd.setCursor(14,0);
+          lcd.print(maximum_moisture);
+
+        }
+
+        else{
+
+          minimum_moisture += 1;
+
+          if (minimum_moisture >=99){
+
+            minimum_moisture = 99;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Min Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(minimum_moisture);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Min Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(minimum_moisture);
+
+          }
+        }
+
+      }
+
+      else if (digitalRead(decrease_btn) ==1 ){
+
+        delay (dt);
+        timer = 0;
+
+        while((digitalRead(decrease_btn) ==1) && (timer <= longPressDuration)){
+
+          timer++;
+            
+        }
+
+        if ( timer >= longPressDuration ){
+            
+          page -= 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Your R.O.T: ");
+          lcd.setCursor(12,0);
+          lcd.print(tankRadius);
+
+        }
+
+        else{
+
+
+          minimum_moisture -= 1;
+
+          if (minimum_moisture <= 0){
+
+            tankRadius = 0;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Min Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(minimum_moisture);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Min Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(minimum_moisture);        
+
+          }
 
         }
 
       }
     }
-  }
 
-  while (page == 3){
-    
-    if (digitalRead(increase_btn) == 1){
+    while (page == 3){
 
-      delay(dt);
-      maximum_moisture += 1;
+      if (digitalRead(increase_btn) == 1){
 
-      if (maximum_moisture >= 99){
+        delay(dt);
+        timer = 0;
 
-        maximum_moisture = 99;
+        while ((digitalRead(increase_btn) == 1) && (timer <= longPressDuration)){
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Max Moisture: ");
-        lcd.setCursor(14, 0);
-        lcd.print(maximum_moisture);
+          timer ++;
 
+        }
+
+        if (( timer >= longPressDuration ) && (maximum_moisture > 0) && (minimum_moisture< maximum_moisture)){
+
+          page += 1;
+          lcd.clear();
+
+        }
+
+        else{
+
+          maximum_moisture += 1;
+
+          if (maximum_moisture >=99){
+
+            maximum_moisture = 99;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Max Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(maximum_moisture);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Max Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(maximum_moisture);
+
+          }
+        }
       }
 
-      else{
+      else if (digitalRead(decrease_btn) == 1){
 
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Max Moisture: ");
-        lcd.setCursor(14, 0);
-        lcd.print(maximum_moisture);
+        delay (dt);
+        timer = 0;
 
-      }
+        while((digitalRead(decrease_btn) ==1) && (timer <= longPressDuration)){
 
-    }
-    
-    else if (digitalRead(decrease_btn) == 1){
+          timer++;
+            
+        }
 
-      delay(dt);
-      timed = 0;
+        if ( timer >= longPressDuration ){
+            
+          page -= 1;
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Min Moisture: ");
+          lcd.setCursor(14,0);
+          lcd.print(minimum_moisture);
 
-      while((digitalRead(decrease_btn) ==1) && (timed <= 5)){
+        }
 
-        timed++;
-        
-      }
+        else {
 
-      if (( timed >= longPressDuration ) && (maximum_moisture > 0) && (minimum_moisture < maximum_moisture)){
-
-        page += 1;
-        lcd.clear();
-
-      }
-
-      else{
-
-        maximum_moisture -= 1;
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Max Moisture: ");
-        lcd.setCursor(14, 0);
+          maximum_moisture -= 1;
 
         if (maximum_moisture <= 0){
 
-          maximum_moisture = 0;
-          lcd.print(maximum_moisture);
+            maximum_moisture = 0;
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Max Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(maximum_moisture);
+
+          }
+
+          else{
+
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Max Moisture: ");
+            lcd.setCursor(14,0);
+            lcd.print(maximum_moisture);        
+
+          }        
 
         }
 
-
-        else{
-
-          lcd.print(maximum_moisture);
-
-        }
       }
     }
 
+    while (page == 4){
+
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("Your Values are: ");
+      lcd.setCursor(0,1);
+      lcd.print("H=");
+      lcd.setCursor(2,1);
+      lcd.print((int)heightOfTank);
+      lcd.setCursor(4,1);
+      lcd.print("R=");
+      lcd.setCursor(6,1);
+      lcd.print((int)tankRadius);
+      lcd.setCursor(8,1);
+      lcd.print("m=");
+      lcd.setCursor(10,1);
+      lcd.print((int)minimum_moisture);
+      lcd.setCursor(12,1);
+      lcd.print("M=");
+      lcd.setCursor(14,1);
+      lcd.print((int)maximum_moisture);
+
+      delay(dt);
+
+      if (digitalRead(increase_btn) == 1){
+
+        delay(dt);
+        lcd.clear();
+        page += 1;
+
+      }
+
+      else if (digitalRead(decrease_btn) == 1){
+
+        delay(dt);
+        lcd.clear();
+        page -=1;
+
+      }
+    }
   }
 
-
   delay(500);
+
 }
 
 void loop() {
@@ -389,8 +527,6 @@ void loop() {
   moisture_percent = (moisture_value / maximum_moisture) * 100.;
 
   minimum_moisture_percent = (minimum_moisture / maximum_moisture) * 100.;
-
-  Serial.println(minimum_moisture_percent);
 
   total_volume = (pie * (tankRadius * tankRadius) * heightOfTank);
 
