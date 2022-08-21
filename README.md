@@ -29,6 +29,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 - Contrast ==> potetiometer to vary lcd contrast
 
+![circuit diagram](https://user-images.githubusercontent.com/65239245/185811462-699d7f81-4db8-4ba8-acc4-001bdbfc1be7.png)
 
 
 <!-- ![circuit diagram](https://user-images.githubusercontent.com/65239245/185797693-7a724a13-d6d0-490f-876e-09ca4026632a.png) -->
