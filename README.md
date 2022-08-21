@@ -27,8 +27,9 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 - Click here for schematic with custom soil moisture [^2]
 
-[^2]: ![Circuit diagram without custom moisture sesnor](https://user-images.githubusercontent.com/65239245/185812297-cc50666b-79a8-4393-af1d-9c09d9c1bcae.png)
-  Schematic for geniue soil moisture sensor
+[^2]:Schematic for geniue soil moisture sensor
+  ![Circuit diagram without custom moisture sesnor](https://user-images.githubusercontent.com/65239245/185812297-cc50666b-79a8-4393-af1d-9c09d9c1bcae.png)
+  <!-- Schematic for geniue soil moisture sensor -->
 
 ## Usage 
 
