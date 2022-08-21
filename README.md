@@ -20,8 +20,9 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 ### Note 
 
-Soil moisture sensor is not a compulsory compnent to get as we are going to be making use of a custom soil moisture sensor in this project
+- In this project i'm going to be making use of a custom soil moisture sensor which you can easily create at home
 
+- Check here to know how to make a custom soil moisture sensor [^1]
 ## Usage 
 
 - Download the project [zip](https://github.com/n1lby73/smart-watering-system/archive/refs/heads/main.zip)
