@@ -7,10 +7,10 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | Name | Qty |
 | :---: | :---: |
 | Arduino uno | 1 |
-| 16 * 2 lcd | 1 |
-| Push button | 2 |
 | buzzer | 1 |
+| 16 * 2 lcd | 1 |
 | 12v dc pump | 1 |
+| Push button | 2 |
 | 10k resistor | 3 | 
 | potentiometer | 1 |
 | Ultrasonic sensor | 1 |
