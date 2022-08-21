@@ -27,4 +27,10 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 - R-_pulldown ==> pulldown resistor for the decrease button
 
+- RPOTvary_contrast1 ==> potetiometer to vary lcd contrast
+
+- ldc_pump ==> used to signify the pump connection
+
+
+
 ![circuit diagram](https://user-images.githubusercontent.com/65239245/185797693-7a724a13-d6d0-490f-876e-09ca4026632a.png)
