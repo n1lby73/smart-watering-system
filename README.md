@@ -10,7 +10,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | 16 * 2 lcd | 1 |
 | Ultrasonic sensor | 1 |
 | potentiometer | 1 |
-| Tip41c | 1 |
+| Tip41c (NPN transistor) | 1 |
 | buzzer | 1 |
 | 12v dc power supply | 1 |
 | 12v dc pump | 1 |
