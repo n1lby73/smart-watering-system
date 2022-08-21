@@ -23,7 +23,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 - In this project i'm going to be making use of a custom soil moisture sensor which you can easily create at home
 
 - Check here to know how to make a custom soil moisture sensor[^1]
-[^1]: Since soil moisture deals with measuring the conductivity of the soil it can easily be reproduced. To do this simply 
+[^1]: Since soil moisture deals with measuring the conductivity of the soil it can easily be reproduced. To do this simply
   - Connect a 10k ohm resistor to your analouge signal pin and then to ground
 
 - Click here for schematic with geninue soil moisture [^2]
