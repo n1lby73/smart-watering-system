@@ -17,5 +17,14 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | Tip41c (NPN transistor) | 1 |
 | 12v dc power supply | 1 |
 
+### Schematic notation
+
+- s > & + ==> switch for next and increasing values
+
+- s < & - ==> switch for previous selection and decreasing values
+
+- R+_pulldown ==> pulldown resistor for the increase button
+
+- R-_pulldown ==> pulldown resistor for the decrease button
 
 ![circuit diagram](https://user-images.githubusercontent.com/65239245/185797693-7a724a13-d6d0-490f-876e-09ca4026632a.png)
