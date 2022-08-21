@@ -20,7 +20,17 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 ### Note 
 
-soil moisture sensor is not a compulsory compnent to get as we are going to be making use of a custom soil moisture in this project
+Soil moisture sensor is not a compulsory compnent to get as we are going to be making use of a custom soil moisture sensor in this project
+
+## Usage 
+
+- Download the project [zip](https://github.com/n1lby73/smart-watering-system/archive/refs/heads/main.zip)
+
+- Extract the project and save it in a folder with any name of your choice 
+
+- Open up the *.ino file with [arduino ide](https://www.arduino.cc/en/software)
+
+- Upload and wire your circuit using the schematics below
 
 <!-- ### Schematic notation
 
@@ -39,3 +49,13 @@ soil moisture sensor is not a compulsory compnent to get as we are going to be m
 
 <!-- ![circuit diagram](https://user-images.githubusercontent.com/65239245/185797693-7a724a13-d6d0-490f-876e-09ca4026632a.png) -->
 
+
+## Support and bug reporting
+- Report found bugs [here](https://github.com/n1lby73/smart-watering-system/issues)
+- Contributions, issues, and feature requests are welcome!
+- Feel free to make PR
+- Give a ★ if you like this project!
+
+## License
+
+[GNU V3](https://github.com/n1lby73/remote-shutdown/blob/main/LICENSE)
