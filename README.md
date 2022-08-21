@@ -44,6 +44,8 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 ![circuit diagram](https://user-images.githubusercontent.com/65239245/185811462-699d7f81-4db8-4ba8-acc4-001bdbfc1be7.png)
 
+## Known issues
+- [Random values](https://github.com/n1lby73/smart-watering-system/issues/1#issue-1345617774)
 
 ## Support and bug reporting
 - Report found bugs [here](https://github.com/n1lby73/smart-watering-system/issues)
