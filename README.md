@@ -24,6 +24,9 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 - Check here to know how to make a custom soil moisture sensor [^1]
 [^1]: test
+
+- Click here for schematic with custom soil moisture [^2]
+[^2]: 
 ## Usage 
 
 - Download the project [zip](https://github.com/n1lby73/smart-watering-system/archive/refs/heads/main.zip)
