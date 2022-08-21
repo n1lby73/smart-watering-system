@@ -19,17 +19,15 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 ### Schematic notation
 
-- s > & + ==> switch for next and increasing values
+- > & + ==> switch for next and increasing values
 
-- s < & - ==> switch for previous selection and decreasing values
+- < & - ==> switch for previous selection and decreasing values
 
-- R+_pulldown ==> pulldown resistor for the increase button
+- + pulldown ==> pulldown resistor for the increase button
 
-- R-_pulldown ==> pulldown resistor for the decrease button
+- - pulldown ==> pulldown resistor for the decrease button
 
-- RPOTvary_contrast1 ==> potetiometer to vary lcd contrast
-
-- ldc_pump ==> used to signify the pump connection
+- Contrast ==> potetiometer to vary lcd contrast
 
 
 
