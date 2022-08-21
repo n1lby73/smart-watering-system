@@ -13,7 +13,8 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | Tip41c | 1 |
 | buzzer | 1 |
 | 12v dc power supply | 1 |
-| 12 v dc pump | 1 |
-
+| 12v dc pump | 1 |
+| Push button | 2 |
+| 10k resistor | 3 | 
 
 ![circuit diagram](https://user-images.githubusercontent.com/65239245/185797693-7a724a13-d6d0-490f-876e-09ca4026632a.png)
