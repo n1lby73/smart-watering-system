@@ -7,17 +7,22 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | Name | Qty |
 | :---: | :---: |
 | Arduino uno | 1 |
-| buzzer | 1 |
+| Buzzer | 1 |
 | 16 * 2 lcd | 1 |
 | 12v dc pump | 1 |
 | Push button | 2 |
 | 10k resistor | 3 | 
-| potentiometer | 1 |
+| Potentiometer | 1 |
+| Soil moisture | 1 |
 | Ultrasonic sensor | 1 |
 | Tip41c (NPN transistor) | 1 |
 | 12v dc power supply | 1 |
 
-### Schematic notation
+### Note 
+
+soil moisture sensor is not a compulsory compnent to get as we are going to be making use of a custom soil moisture in this project
+
+<!-- ### Schematic notation
 
 - > & + ==> switch for next and increasing values
 
@@ -27,7 +32,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 - - pulldown ==> pulldown resistor for the decrease button
 
-- Contrast ==> potetiometer to vary lcd contrast
+- Contrast ==> potetiometer to vary lcd contrast -->
 
 ![circuit diagram](https://user-images.githubusercontent.com/65239245/185811462-699d7f81-4db8-4ba8-acc4-001bdbfc1be7.png)
 
