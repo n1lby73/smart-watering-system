@@ -28,7 +28,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 - The two push button used in the projection are dual functioned enabled
 
     | Push button A | Push button B |
-    | :----: | :----: |
+    | :----: | :----: | :----: |
     | Push button A | Next | p |
     | Push Button B | Previous | d |
 
