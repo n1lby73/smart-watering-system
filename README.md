@@ -59,7 +59,6 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 | Arduino digital pin | usage |
 | :----: | :----: |
-
 | AO | Soil moisture sensor |
 
 ## Known issues
