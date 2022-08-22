@@ -26,9 +26,8 @@ Automate the process of watering your flower and get a relaxed mind as you would
   - Click here for schematic with geninue soil moisture [^2]
 
 - The two push button used in the projection are dual functioned enabled
-
-|  | LongPress | ShortPress |
-| :----: | :----: | 
+|  Push button A | Push button B |
+| :----: | :----: |
 | Push button A | Next | Increment value |
 | Push Button B | Previous | Decreament Value |
 
