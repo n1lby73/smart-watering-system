@@ -49,7 +49,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 ## pin use
 | Arduino pin | use |
 | :----: | :----: |
-| DIGITAL PINS    |
+| DIGITAL PINS    
 | pin 2 | custom RX pin |
 | pin 3 | custom TX pin |
 | pin 4 | turn relay on and off |
