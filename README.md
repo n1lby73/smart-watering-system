@@ -55,7 +55,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | pin 11 | Buzzer |
 | pin 12 | Increase and next button |
 | pin 13 | Decrease and previous button |
-|  |  |
+| --- | ---  |
 |  |  |
 | Arduino digital pin | usage |
 | AO | Soil moisture sensor |
