@@ -57,7 +57,7 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | pin 13 | Decrease and previous button |
 
 
-| Arduino digital pin | usage |
+| Arduino analouge pin | usage |
 | :----: | :----: |
 | AO | Soil moisture sensor |
 
