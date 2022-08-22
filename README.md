@@ -50,12 +50,11 @@ Automate the process of watering your flower and get a relaxed mind as you would
 | Arduino digital pin | usage |
 | :----: | :----: |
 | pin 2 - 7 | LCD (rs,en,d4,d5,d6,d7) |
-| pin 8 |  | 
-| pin 9 |  |
-| pin 10 |  |
-| pin 11 |  |
-| pin 12 |  |
-| pin 13 |  |
+| pin 8 - 9 | Ultrasonic (tig, echo) | 
+| pin 10 | Dc pump |
+| pin 11 | Buzzer |
+| pin 12 | Increase and next button |
+| pin 13 | Decrease and previous button |
  
 ## Known issues
 - [Random moisture values](https://github.com/n1lby73/smart-watering-system/issues/1#issue-1345617774)
