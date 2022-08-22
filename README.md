@@ -26,10 +26,12 @@ Automate the process of watering your flower and get a relaxed mind as you would
   - Click here for schematic with geninue soil moisture [^2]
 
 - The two push button used in the projection are dual functioned enabled
-| Push button A | Push button B |
+
+| Arduino pin | use |
 | :----: | :----: |
-| Push button A | Next | Increment value |
-| Push Button B | Previous | Decreament Value |
+| pin 3 | custom RX pin |
+| pin 4 | custom TX pin |
+| pin 5 | turn relay on and off |
 
 [^1]: Since soil moisture deals with measuring the conductivity of the soil it can easily be reproduced. To do this simply Connect a 10k ohm resistor to your analouge signal pin and then to ground after which you take out jumpers from your 5v power supply and from the signal pin you pulled down with the 10k ohm resistor. If you're correct, you're circuit should be looking like this as i am currently using an led to indicate the two wires that are meant to go into your soil                                        ![moisture sensor](https://user-images.githubusercontent.com/65239245/185814108-e13458bc-3dc3-41fa-a580-5545dfe56310.png)
 
