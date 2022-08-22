@@ -47,21 +47,15 @@ Automate the process of watering your flower and get a relaxed mind as you would
 
 
 ## pin use
-| Arduino pin | use |
+| Arduino digital pin | usage |
 | :----: | :----: |
-| DIGITAL PINS    
-| pin 2 | custom RX pin |
-| pin 3 | custom TX pin |
-| pin 4 | turn relay on and off |
-| pin 5 |
-| pin 6 |
-| pin 7 |
-| pin 8 |
-| pin 9 |
-| pin 10 |
-| pin 11 |
-| pin 12 |
-| pin 13 |
+| pin 2 - 7 | LCD (rs,en,d4,d5,d6,d7) |
+| pin 8 |  | 
+| pin 9 |  |
+| pin 10 |  |
+| pin 11 |  |
+| pin 12 |  |
+| pin 13 |  |
  
 ## Known issues
 - [Random moisture values](https://github.com/n1lby73/smart-watering-system/issues/1#issue-1345617774)
