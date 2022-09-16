@@ -1,6 +1,6 @@
 # smart-watering-system
 
-Automate the process of watering your flower and get a relaxed mind as you would never be in a haste or worried that you forgot to water your flowers before leaving home 
+Automate the process of watering your flower and your mind would be at rest as you would never be in a haste or worried that you forgot to water your flowers at the appropriate time 
 
 ## Components needed
 
